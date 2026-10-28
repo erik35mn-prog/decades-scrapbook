@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Decades Scrapbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:opsz,wght@9..144,600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--desk:#e6e3dc;--ui:#1d1c1b;--btn:#2d3e66;--btnt:#fff;--line:#b9b5aa;color-scheme:light dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#17171b;--ui:#efece4;--btn:#8fa6e0;--btnt:#101216;--line:#46454d}}
+:root[data-theme="dark"]{--desk:#17171b;--ui:#efece4;--btn:#8fa6e0;--btnt:#101216;--line:#46454d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--desk);color:var(--ui);font:400 1.15rem/1.5 'Atkinson Hyperlegible',system-ui,sans-serif}
+main{max-width:560px;margin:0 auto;padding:1rem 1rem 3rem}
+h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:600;margin:0;line-height:1.15}
+button,select,input,textarea{font:inherit;color:inherit}
+.btn{min-height:56px;padding:.6rem 1.2rem;border-radius:10px;border:0;background:var(--btn);color:var(--btnt);font-weight:700;cursor:pointer;width:100%;margin-top:.7rem}
+.btn.alt{background:transparent;color:var(--ui);border:2px solid var(--line)}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #e0a82e;outline-offset:2px}
+.turn{animation:turn .45s ease-out}
+@keyframes turn{from{transform:perspective(900px) rotateY(-14deg);opacity:.4;transform-origin:left center}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.turn{animation:none}}
+/* cover */
+.cover{border-radius:8px 18px 18px 8px;padding:2.2rem 1.4rem;min-height:340px;box-shadow:inset 14px 0 0 rgba(0,0,0,.18),0 10px 30px rgba(0,0,0,.35);text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1rem;border:2px dashed rgba(0,0,0,.25)}
+.cover h1{font-size:2.1rem;word-break:break-word}
+.cover.dark{border-color:rgba(255,255,255,.3)}
+.stick{font-size:2.4rem;letter-spacing:.2rem;min-height:3rem}
+.tools{margin-top:1.2rem}
+.tools label{display:block;font-weight:700;margin:.9rem 0 .35rem}
+.tools input[type=text]{width:100%;min-height:52px;padding:.5rem .8rem;border-radius:10px;border:2px solid var(--line);background:transparent}
+.sw{display:flex;gap:.6rem;flex-wrap:wrap}
+.sw button{width:52px;height:52px;border-radius:50%;border:3px solid var(--line);cursor:pointer}
+.sw button[aria-pressed=true]{border-color:var(--ui);box-shadow:0 0 0 3px var(--desk),0 0 0 5px var(--ui)}
+.st button{font-size:1.7rem;min-width:52px;min-height:52px;border-radius:10px;border:2px solid var(--line);background:transparent;cursor:pointer}
+/* album pages */
+.page{background:#161514;color:#f1eee6;border-radius:6px 16px 16px 6px;padding:1.4rem 1.2rem;border-left:12px solid #070706;box-shadow:0 10px 28px rgba(0,0,0,.35);margin-top:1rem}
+.page h2{font-size:1.8rem}
+.page .sub{color:#b8b3a6;margin:.2rem 0 1rem}
+.toc button{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:60px;padding:.5rem .2rem;background:none;border:0;border-bottom:1px dotted #5a574f;color:inherit;cursor:pointer;text-align:left;font-size:1.3rem}
+.toc button span:last-child{color:#b8b3a6;font-size:1rem}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0}
+.chips button{min-height:48px;padding:.3rem .9rem;border-radius:24px;border:2px solid #5a574f;background:none;color:inherit;cursor:pointer}
+.chips button[aria-pressed=true]{background:#f1eee6;color:#161514;border-color:#f1eee6;font-weight:700}
+.entry{margin:1.2rem 0}
+.entry .ph{background:#000;padding:10px;border:1px solid #444;display:inline-block;max-width:100%;transform:rotate(-1.2deg);box-shadow:0 4px 10px rgba(0,0,0,.5)}
+.entry:nth-of-type(even) .ph{transform:rotate(1.2deg)}
+.entry img{display:block;max-width:100%;max-height:340px}
+.cap{font-family:'Caveat',cursive;font-size:1.6rem;line-height:1.25;margin:.5rem 0 0}
+.meta{display:flex;gap:.8rem;align-items:center;color:#b8b3a6;font-size:1rem;flex-wrap:wrap}
+.meta button{background:none;border:0;color:#e9a0a0;text-decoration:underline;cursor:pointer;min-height:44px}
+.form{border-top:2px solid #3a3832;margin-top:1.4rem;padding-top:1rem}
+.form label{display:block;font-weight:700;margin:.8rem 0 .3rem}
+.form select,.form textarea{width:100%;min-height:52px;padding:.5rem .7rem;border-radius:10px;border:2px solid #5a574f;background:#0d0c0b;color:#f1eee6}
+.form textarea{min-height:90px}
+.form input[type=file]{width:100%;padding:.5rem 0}
+.page .btn{background:#f1eee6;color:#161514}
+.page .btn.alt{background:none;color:#f1eee6;border:2px solid #5a574f}
+.nav{display:flex;gap:.7rem}
+.note{color:#b8b3a6;font-size:.95rem;margin-top:.8rem}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+var DECADES=[1950,1960,1970,1980,1990,2000,2010,2020];
+var COLORS=['#c9ced1','#2f5d50','#7a2e3a','#2d3e66','#8a6a3b','#4a3a5c'];
+var STICKERS=['⭐','❤️','🌻','📷','🎈','🏡','🎸','✈️'];
+var S={title:'',color:COLORS[0],stickers:[],entries:[]};
+try{var raw=localStorage.getItem('decadesScrapbook');if(raw){S=Object.assign(S,JSON.parse(raw));}}catch(e){}
+var V={name:'cover'},pending=null;
+function save(){try{localStorage.setItem('decadesScrapbook',JSON.stringify(S));}catch(e){alert('This device is out of room for more photos in this preview.');}}
+function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+function isDark(h){var n=parseInt(h.slice(1),16),r=n>>16,g=(n>>8)&255,b=n&255;return (0.299*r+0.587*g+0.114*b)<140;}
+function go(name,p){V=Object.assign({name:name},p||{});pending=null;render(true);window.scrollTo(0,0);}
+function count(d){return S.entries.filter(function(e){return e.decade===d;}).length;}
+function render(turn){
+  var h='';
+  if(V.name==='cover'){
+    var dk=isDark(S.color);
+    h+='<div class="cover'+(dk?' dark':'')+'" style="background:'+S.color+';color:'+(dk?'#f5f2ea':'#22262a')+'">'
+     +'<h1>'+(S.title?esc(S.title):'Your book is blank')+'</h1>'
+     +'<div class="stick" aria-label="Stickers">'+(S.stickers.join(' ')||(S.title?'':'Make it yours below'))+'</div></div>'
+     +'<div class="tools"><button class="btn" onclick="go(\'toc\')">Open the book</button>'
+     +'<label for="ttl">Book title</label><input id="ttl" type="text" maxlength="40" placeholder="The Johnson Family Years" value="'+esc(S.title)+'" oninput="S.title=this.value;save();paintCover()">'
+     +'<label>Cover color</label><div class="sw">'+COLORS.map(function(c){return '<button aria-label="Cover color '+c+'" aria-pressed="'+(c===S.color)+'" style="background:'+c+'" onclick="S.color=\''+c+'\';save();render()"></button>';}).join('')+'</div>'
+     +'<label>Stickers</label><div class="sw st">'+STICKERS.map(function(s){return '<button onclick="addSt(\''+s+'\')">'+s+'</button>';}).join('')+'</div>'
+     +'<button class="btn alt" onclick="S.stickers=[];save();render()">Clear stickers</button></div>';
+  }
+  if(V.name==='toc'){
+    h+='<div class="page"><h2>Table of contents</h2><p class="sub">Pick a decade to turn to its pages.</p><div class="toc">'
+     +DECADES.map(function(d){var c=count(d);return '<button onclick="go(\'decade\',{decade:'+d+',year:null})"><span>The '+d+'s</span><span>'+c+(c===1?' memory':' memories')+'</span></button>';}).join('')
+     +'</div></div><button class="btn alt" onclick="go(\'cover\')">Back to the cover</button>';
+  }
+  if(V.name==='decade'){
+    var d=V.decade,yrs=[];for(var i=0;i<10;i++)yrs.push(d+i);
+    var list=S.entries.filter(function(e){return e.decade===d&&(V.year===null||e.year===V.year);});
+    h+='<div class="page"><h2>The '+d+'s</h2><p class="sub">Add photos and stories from any year in this decade.</p>'
+     +'<div class="chips" role="group" aria-label="Filter by year"><button aria-pressed="'+(V.year===null)+'" onclick="V.year=null;render()">All years</button>'
+     +yrs.map(function(y){return '<button aria-pressed="'+(V.year===y)+'" onclick="V.year='+y+';render()">'+y+'</button>';}).join('')+'</div>';
+    if(!list.length)h+='<p>No memories here yet. Add the first one below.</p>';
+    list.forEach(function(e){
+      h+='<div class="entry">'+(e.photo?'<div class="ph"><img src="'+e.photo+'" alt="Photo from '+(e.year||'the '+d+'s')+'"></div>':'')
+       +(e.note?'<p class="cap">'+esc(e.note)+'</p>':'')
+       +'<div class="meta"><span>'+(e.year||'Sometime in the '+d+'s')+'</span><span>🔒 Private</span><button onclick="del('+e.id+')">Delete</button></div></div>';
+    });
+    h+='<div class="form"><h2 style="font-size:1.4rem">Add a memory</h2>'
+     +'<label for="yr">Year</label><select id="yr"><option value="">Not sure of the year</option>'+yrs.map(function(y){return '<option value="'+y+'"'+(V.year===y?' selected':'')+'>'+y+'</option>';}).join('')+'</select>'
+     +'<label for="pic">Photo</label><input id="pic" type="file" accept="image/*" onchange="pick(this)">'
+     +'<label for="nt">Your note</label><textarea id="nt" placeholder="Who was there? What do you remember?"></textarea>'
+     +'<button class="btn" onclick="add()">Save this memory</button><p class="note">Everything you save is private to you for now.</p></div></div>'
+     +'<div class="nav"><button class="btn alt" '+(DECADES.indexOf(d)===0?'disabled style="opacity:.4"':'onclick="go(\'decade\',{decade:'+(d-10)+',year:null})"')+'>Earlier</button>'
+     +'<button class="btn alt" onclick="go(\'toc\')">Contents</button>'
+     +'<button class="btn alt" '+(DECADES.indexOf(d)===DECADES.length-1?'disabled style="opacity:.4"':'onclick="go(\'decade\',{decade:'+(d+10)+',year:null})"')+'>Later</button></div>';
+  }
+  var app=document.getElementById('app');app.innerHTML='<div'+(turn?' class="turn"':'')+'>'+h+'</div>';
+}
+function paintCover(){var c=document.querySelector('.cover h1');if(c)c.textContent=S.title||'Your book is blank';}
+function addSt(s){if(S.stickers.length<8){S.stickers.push(s);save();render();}}
+function pick(inp){
+  var f=inp.files&&inp.files[0];if(!f){pending=null;return;}
+  var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){
+    var m=800,k=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');
+    c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+    pending=c.toDataURL('image/jpeg',.75);};im.src=r.result;};r.readAsDataURL(f);
+}
+function add(){
+  var note=document.getElementById('nt').value.trim(),yr=document.getElementById('yr').value;
+  if(!pending&&!note){alert('Add a photo or a note first.');return;}
+  S.entries.push({id:Date.now(),decade:V.decade,year:yr?+yr:null,note:note,photo:pending});
+  pending=null;save();render();
+}
+function del(id){if(confirm('Delete this memory? This can’t be undone.')){S.entries=S.entries.filter(function(e){return e.id!==id;});save();render();}}
+render(false);
+</script>
+</body>
+</html>
