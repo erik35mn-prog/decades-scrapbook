@@ -25,10 +25,11 @@ button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-vis
 @keyframes turn{0%{transform:perspective(1100px) rotateY(-75deg);opacity:.2;filter:brightness(.5)}60%{opacity:1}100%{transform:none;filter:none}}
 @media (prefers-reduced-motion:reduce){.turn{animation:none}}
 /* cover */
-.cover{border-radius:8px 18px 18px 8px;padding:2.2rem 1.4rem;min-height:340px;box-shadow:inset 14px 0 0 rgba(0,0,0,.18),0 10px 30px rgba(0,0,0,.35);text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1rem;border:2px dashed rgba(0,0,0,.25)}
+.cover{border-radius:8px 18px 18px 8px;padding:2.2rem 1.4rem;min-height:56vh;cursor:pointer;box-shadow:inset 14px 0 0 rgba(0,0,0,.18),0 10px 30px rgba(0,0,0,.35);text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1rem;border:2px dashed rgba(0,0,0,.25)}
 .cover h1{font-size:2.1rem;word-break:break-word}
 .cover.dark{border-color:rgba(255,255,255,.3)}
 .stick{font-size:2.4rem;letter-spacing:.2rem;min-height:3rem}
+.tap{margin:0;font-size:1rem;opacity:.75}
 .tools{margin-top:1.2rem}
 .tools label{display:block;font-weight:700;margin:.9rem 0 .35rem}
 .tools input[type=text]{width:100%;min-height:52px;padding:.5rem .8rem;border-radius:10px;border:2px solid var(--line);background:transparent}
@@ -88,14 +89,14 @@ function render(turn){
   var h='';
   if(V.name==='cover'){
     var dk=isDark(S.color);
-    h+='<div class="cover'+(dk?' dark':'')+'" style="background:'+S.color+';color:'+(dk?'#f5f2ea':'#22262a')+'">'
+    h+='<div class="cover'+(dk?' dark':'')+'" role="button" tabindex="0" aria-label="Open the book" onclick="go(\'toc\')" onkeydown="if(event.key===\'Enter\')go(\'toc\')" style="background:'+S.color+';color:'+(dk?'#f5f2ea':'#22262a')+'">'
      +'<h1>'+(S.title?esc(S.title):'Your book is blank')+'</h1>'
-     +'<div class="stick" aria-label="Stickers">'+(S.stickers.join(' ')||(S.title?'':'Make it yours below'))+'</div></div>'
-     +'<div class="tools"><button class="btn" onclick="go(\'toc\')">Open the book</button>'
+     +'<div class="stick" aria-label="Stickers">'+S.stickers.join(' ')+'</div><p class="tap">Tap the cover to open</p></div>'
+     +'<div class="tools"><button class="btn" onclick="go(\'toc\')">Open the book</button><button class="btn alt" onclick="V.dec=!V.dec;render()">'+(V.dec?'Done decorating':'Decorate the cover')+'</button>'+(V.dec?'<div>'
      +'<label for="ttl">Book title</label><input id="ttl" type="text" maxlength="40" placeholder="The Johnson Family Years" value="'+esc(S.title)+'" oninput="S.title=this.value;save();paintCover()">'
      +'<label>Cover color</label><div class="sw">'+COLORS.map(function(c){return '<button aria-label="Cover color '+c+'" aria-pressed="'+(c===S.color)+'" style="background:'+c+'" onclick="S.color=\''+c+'\';save();render()"></button>';}).join('')+'</div>'
      +'<label>Stickers</label><div class="sw st">'+STICKERS.map(function(s){return '<button onclick="addSt(\''+s+'\')">'+s+'</button>';}).join('')+'</div>'
-     +'<button class="btn alt" onclick="S.stickers=[];save();render()">Clear stickers</button></div>';
+     +'<button class="btn alt" onclick="S.stickers=[];save();render()">Clear stickers</button></div>':'')+'</div>';
   }
   if(V.name==='toc'){
     h+='<div class="page"><h2>Table of contents</h2><p class="sub">Pick a decade to turn to its pages.</p><div class="toc">'
